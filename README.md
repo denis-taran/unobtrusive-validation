@@ -1,8 +1,14 @@
-# Unobtrusive ASP.NET-compatible validation library without dependencies
+# Unobtrusive validation library without dependencies
 
+This small package allows you to add validation properties to HTML tags without writing any client-side code.
 
+The library is compatible with unobtrusive validation library used in ASP.NET, but it doesn't require JQuery library.
 
-Unlike the original library, it doesn't require any external libraries like JQuery.
+Use the following command to install the library:
+
+    npm install --save-dev unobtrusive-validation
+
+If you don't use NPM, just include `index.min.js` into your HTML file and it should work out of the box.
 
 ## License
 
