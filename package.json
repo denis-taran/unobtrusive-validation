@@ -10,6 +10,13 @@
   "author": "Denys Krasnoshchok",
   "license": "MIT",
   "types": "./index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kraaden/unobtrusive-validation.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kraaden/unobtrusive-validation/issues"
+  },
   "keywords": [
     "validation",
     "unobtrusive",
