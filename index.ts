@@ -127,16 +127,20 @@ function regexValidator(element: IFormElement): boolean {
     return true;
 }
 
-function equalValidator(element: IFormElement): boolean {
+function equalityValidator(element: IFormElement): boolean {
     const errorMsg = element.getAttribute("data-val-equalto");
-    const anotherField = document.querySelector(element.getAttribute("data-val-equalto-other") || "") as IFormElement;
-
-    if (errorMsg && anotherField) {
-        if (anotherField.value !== element.value) {
-            showError(element, errorMsg);
-            return false;
+    const other = element.getAttribute("data-val-equalto-other") || "";
+    const name = other.replace(/[^0-9a-zA-Z_]/g, '');
+    if (name) {
+        const anotherField = document.querySelector("[name='" + name + "']") as IFormElement;
+        if (errorMsg && anotherField) {
+            if (anotherField.value !== element.value) {
+                showError(element, errorMsg);
+                return false;
+            }
         }
     }
+
     return true;
 }
 
@@ -219,7 +223,7 @@ form_validators.push(lengthValidator);
 form_validators.push(regexValidator);
 form_validators.push(rangeValidator);
 form_validators.push(numberValidator);
-form_validators.push(equalValidator);
+form_validators.push(equalityValidator);
 
 function executeHandlers(evt: Event, succeeded: boolean) {
     for (let handler of form_validation_handlers) {
