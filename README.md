@@ -1,8 +1,14 @@
 # Unobtrusive validation library without dependencies
 
+Demo:
+
+https://kraaden.github.io/unobtrusive-validation/
+
 This small package allows you to add validation properties to HTML tags without writing any client-side code.
 
-The library is compatible with unobtrusive validation library used in `ASP.NET`, but it doesn't require JQuery library.
+The library is compatible with unobtrusive validation library used in `ASP.NET`, but it doesn't require JQuery.
+
+
 
 Use the following command to install the library:
 
@@ -29,7 +35,9 @@ You can execute a function after validation to perform some additional work. For
 
     // without using a module bundler
 
-    window["unobtrusive-validation"].form_validation_handlers.push(function(evt, succeeded) {
+    const handlers = window["unobtrusive-validation"].form_validation_handlers;
+
+    handlers.push(function(evt, succeeded) {
         if (!succeeded) {
             hideSpinner();
         }
