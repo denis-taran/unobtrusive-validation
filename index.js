@@ -70,6 +70,17 @@
       }
       return true;
   }
+  function numberValidator(element) {
+      var message = element.getAttribute("data-val-number");
+      if (message) {
+          var val = getElementValue(element).trim();
+          if (!isInt(val)) {
+              showError(element, message);
+              return false;
+          }
+      }
+      return true;
+  }
   function lengthValidator(element) {
       var errorMsg = element.getAttribute("data-val-length");
       var minlen = element.getAttribute("data-val-length-min");
@@ -99,6 +110,17 @@
       var value = getElementValue(element);
       if (errorMsg && regexPattern && value) {
           if (!value.match("^" + regexPattern + "$")) {
+              showError(element, errorMsg);
+              return false;
+          }
+      }
+      return true;
+  }
+  function equalValidator(element) {
+      var errorMsg = element.getAttribute("data-val-equalto");
+      var anotherField = document.querySelector(element.getAttribute("data-val-equalto-other") || "");
+      if (errorMsg && anotherField) {
+          if (anotherField.value !== element.value) {
               showError(element, errorMsg);
               return false;
           }
@@ -175,6 +197,8 @@
   form_validators.push(lengthValidator);
   form_validators.push(regexValidator);
   form_validators.push(rangeValidator);
+  form_validators.push(numberValidator);
+  form_validators.push(equalValidator);
   function executeHandlers(evt, succeeded) {
       for (var _i = 0, form_validation_handlers_1 = form_validation_handlers; _i < form_validation_handlers_1.length; _i++) {
           var handler = form_validation_handlers_1[_i];

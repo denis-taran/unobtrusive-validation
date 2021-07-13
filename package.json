@@ -1,6 +1,6 @@
 {
   "name": "unobtrusive-validation",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Lightweight unobtrusive ASP.NET validation without dependencies",
   "main": "index.js",
   "scripts": {
@@ -18,6 +18,10 @@
     "url": "https://github.com/kraaden/unobtrusive-validation/issues"
   },
   "keywords": [
+    "ASP.NET",
+    "ASP.NET CORE",
+    "MVC",
+    ".NET",
     "validation",
     "unobtrusive",
     "lightweight",
@@ -35,7 +39,8 @@
     "tiny",
     "small",
     "typescript",
-    "widget"
+    "widget",
+    "JQuery"
   ],
   "devDependencies": {
     "rollup": "2.53.1",

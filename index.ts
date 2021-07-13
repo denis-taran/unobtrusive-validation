@@ -78,6 +78,18 @@ function requiredValidator(element: IFormElement): boolean {
     return true;
 }
 
+function numberValidator(element: IFormElement): boolean {
+    const message = element.getAttribute("data-val-number");
+    if (message) {
+        const val = getElementValue(element).trim();
+        if (!isInt(val)) {
+            showError(element, message);
+            return false;
+        }
+    }
+    return true;
+}
+
 function lengthValidator(element: IFormElement): boolean {
     const errorMsg = element.getAttribute("data-val-length");
     const minlen = element.getAttribute("data-val-length-min");
@@ -108,6 +120,19 @@ function regexValidator(element: IFormElement): boolean {
     const value = getElementValue(element);
     if (errorMsg && regexPattern && value) {
         if (!value.match(`^${regexPattern}$`)) {
+            showError(element, errorMsg);
+            return false;
+        }
+    }
+    return true;
+}
+
+function equalValidator(element: IFormElement): boolean {
+    const errorMsg = element.getAttribute("data-val-equalto");
+    const anotherField = document.querySelector(element.getAttribute("data-val-equalto-other") || "") as IFormElement;
+
+    if (errorMsg && anotherField) {
+        if (anotherField.value !== element.value) {
             showError(element, errorMsg);
             return false;
         }
@@ -193,6 +218,8 @@ form_validators.push(requiredValidator);
 form_validators.push(lengthValidator);
 form_validators.push(regexValidator);
 form_validators.push(rangeValidator);
+form_validators.push(numberValidator);
+form_validators.push(equalValidator);
 
 function executeHandlers(evt: Event, succeeded: boolean) {
     for (let handler of form_validation_handlers) {

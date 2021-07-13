@@ -44,6 +44,38 @@ You can execute a function after validation to perform some additional work. For
     });
 ```
 
+## Validation Attributes
+
+|Attribute|Explanation|
+|-|-|
+|`data-val="true"`|Enable unobtrusive validation on this element. This attribute must be on every input element you want to validate.|
+|`data-val-required="error message"`|The input must have a value|
+|`data-val-length="err msg", data-val-length-min="10", data-val-length-max="20"`|The provided string must have the specified length|
+|`data-val-number="err. msg."`|The input must be an integer number|
+|`data-val-equalto="err. msg.", data-val-equalto-other="FieldName"`|Both fields must have the same value|
+|`data-val-regex="err. msg", data-val-regex-pattern="^regex$"`|The field must match the regex pattern.|
+
+The original validation library also provides some additional rarely-used attributes, but they are currently not supported.
+
+## ASP.NET
+
+`ASP.NET` will automatically add the required validation attributes to the generated HTML. You only need to mark all model properties with the corresponding attributes:
+
+    public class AddUserVM
+    {
+        [DisplayName("First Name:")]
+        [Required]
+        public string FirstName { get; set; }
+        
+        [DisplayName("Last Name:")]
+        [Required]
+        public string LastName { get; set; }
+    }
+
+Then add the `asp-for` attribute to your HTML as shown below:
+
+    <input type="text" asp-for="FirstName" />
+
 ## License
 
 The library is released under the MIT License.
