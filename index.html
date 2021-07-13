@@ -12,18 +12,38 @@
 	</style>
 </head>
 
+<style>
+	* {
+		font-family: "-apple-system", BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif!important;
+	}
+
+	h1.title {
+		font-weight: 700;
+	}
+
+	.infos {
+		padding-left: 10px;
+	}
+</style>
+
 <body>
 	<section class="section">
 		<div class="container">
+			
 			<h1 class="title">
 				Unobtrusive Validation Library
 			</h1>
+			
 			<p class="subtitle">
 				This small package allows you to add validation properties to HTML tags without writing any client-side
 				code.
 			</p>
 
-			<form>
+			<p class="infos">
+				Try to submit the following form without entering any details.
+			</p>
+
+			<form onsubmit="arguments[0].preventDefault()">
 				<div class="column is-half">
 					<div class="columns is-multiline">
 						<div class="column is-full">
@@ -63,19 +83,13 @@
 				</div>
 			</form>
 
-
-
+			<br />
+			<br />
+			
+			<p class="infos">
+				You can see a more sophisticated real-world example on the following <a href='https://smartscheduling.com/en/account/registration'>registration page</a>.
+			</p>
 
 		</div>
 	</section>
-
-<script>
-	window["unobtrusive-validation"].form_validation_handlers.push(function(evt, succeeded) {
-		if (succeeded) {
-			alert('Data successfully submitted!');
-			evt.preventDefault();
-		}
-	});
-</script>
-
 </body>
