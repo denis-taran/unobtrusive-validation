@@ -2,13 +2,39 @@
 
 This small package allows you to add validation properties to HTML tags without writing any client-side code.
 
-The library is compatible with unobtrusive validation library used in ASP.NET, but it doesn't require JQuery library.
+The library is compatible with unobtrusive validation library used in `ASP.NET`, but it doesn't require JQuery library.
 
 Use the following command to install the library:
 
     npm install --save-dev unobtrusive-validation
 
 If you don't use NPM, just include `index.min.js` into your HTML file and it should work out of the box.
+
+You will also need to include the provided stylesheet located in the `index.css` file. As an alternative you can define the class `.field-validation-error` directly in your codebase without importing the file.
+
+## Execute a function after validation
+
+You can execute a function after validation to perform some additional work. For example, you can show/hide a spinner that prevents double submits:
+
+```javascript
+    // if you use a module bundler
+
+    import { form_validation_handlers } from 'unobtrusive-validation';
+
+    form_validation_handlers.push(function(evt, succeeded) {
+        if (!succeeded) {
+            hideSpinner();
+        }
+    });
+
+    // without using a module bundler
+
+    window["unobtrusive-validation"].form_validation_handlers.push(function(evt, succeeded) {
+        if (!succeeded) {
+            hideSpinner();
+        }
+    });
+```
 
 ## License
 

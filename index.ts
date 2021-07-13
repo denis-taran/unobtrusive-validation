@@ -9,10 +9,16 @@ interface IFormElement extends HTMLElement {
     type: string;
 }
 
-export const validators: ((element: IFormElement) => boolean)[] = [];
+/**
+ * List of handlers that will be executed after validation is finished for the submitted form.
+ * You can use them to hide/show a spinner or do some additional work.
+ */
+export const form_validation_handlers: ((evt: Event, succeeded: boolean) => void)[] = [];
 
-export declare var failed_validation_handler: (e: Event) => void;
-export declare var successful_validation_handler: (e: Event) => void;
+/**
+ * List of validators used by the library to validate form elements
+ */
+export const form_validators: ((element: IFormElement) => boolean)[] = [];
 
 function getElementValue(element: IFormElement): string {
     return element.value;
@@ -42,7 +48,7 @@ function clearError(element: HTMLElement) {
 
 function validateElement(element: IFormElement): boolean {
     let success = true;
-    for (const validator of validators) {
+    for (const validator of form_validators) {
         success = success && validator(element);
     }
     if (success) {
@@ -183,10 +189,16 @@ function validateForm(form: HTMLFormElement): boolean {
     return valid;
 }
 
-validators.push(requiredValidator);
-validators.push(lengthValidator);
-validators.push(regexValidator);
-validators.push(rangeValidator);
+form_validators.push(requiredValidator);
+form_validators.push(lengthValidator);
+form_validators.push(regexValidator);
+form_validators.push(rangeValidator);
+
+function executeHandlers(evt: Event, succeeded: boolean) {
+    for (let handler of form_validation_handlers) {
+        handler(evt, succeeded);
+    }
+}
 
 window.addEventListener('DOMContentLoaded', function() {
     var elements = document.querySelectorAll<HTMLFormElement>('form');
@@ -194,21 +206,12 @@ window.addEventListener('DOMContentLoaded', function() {
     [].forEach.call(elements, function(form: HTMLFormElement) {
         form.addEventListener("submit", function(ev) {
             if (!validateForm(form)) {
-                if (failed_validation_handler) {
-                    failed_validation_handler(ev);
-                }
+                executeHandlers(ev, false);
                 ev.preventDefault();
                 return;
             }
 
-            if (successful_validation_handler) {
-                successful_validation_handler(ev);
-            }
-
-            var buttons = form.querySelectorAll("button[data-prevent-double-submit]");
-            [].forEach.call(buttons, function(button: HTMLButtonElement) {
-                button.setAttribute("disabled", "disabled");
-            });
+            executeHandlers(ev, true);
         });
     });
 });
