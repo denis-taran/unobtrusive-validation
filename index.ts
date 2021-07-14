@@ -1,6 +1,6 @@
  /*
   * https://github.com/kraaden/unobtrusive-validation
-  * Copyright (c) 2016 Denys Krasnoshchok
+  * Copyright (c) 2021 - Denys Krasnoshchok
   * MIT License
   */
 
