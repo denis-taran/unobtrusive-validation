@@ -13,12 +13,12 @@ interface IFormElement extends HTMLElement {
  * List of handlers that will be executed after validation is finished for the submitted form.
  * You can use them to hide/show a spinner or do some additional work.
  */
-export const form_validation_handlers: ((evt: Event, succeeded: boolean) => void)[] = [];
+export const validationHandlers: ((evt: Event, succeeded: boolean) => void)[] = [];
 
 /**
  * List of validators used by the library to validate form elements
  */
-export const form_validators: ((element: IFormElement) => boolean)[] = [];
+export const validators: ((element: IFormElement) => boolean)[] = [];
 
 function getElementValue(element: IFormElement): string {
     return element.value;
@@ -48,7 +48,7 @@ function clearError(element: HTMLElement) {
 
 function validateElement(element: IFormElement): boolean {
     let success = true;
-    for (const validator of form_validators) {
+    for (const validator of validators) {
         success = success && validator(element);
     }
     if (success) {
@@ -218,15 +218,15 @@ function validateForm(form: HTMLFormElement): boolean {
     return valid;
 }
 
-form_validators.push(requiredValidator);
-form_validators.push(lengthValidator);
-form_validators.push(regexValidator);
-form_validators.push(rangeValidator);
-form_validators.push(numberValidator);
-form_validators.push(equalityValidator);
+validators.push(requiredValidator);
+validators.push(lengthValidator);
+validators.push(regexValidator);
+validators.push(rangeValidator);
+validators.push(numberValidator);
+validators.push(equalityValidator);
 
 function executeHandlers(evt: Event, succeeded: boolean) {
-    for (let handler of form_validation_handlers) {
+    for (let handler of validationHandlers) {
         handler(evt, succeeded);
     }
 }

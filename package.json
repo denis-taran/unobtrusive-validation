@@ -1,6 +1,6 @@
 {
   "name": "unobtrusive-validation",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "description": "Lightweight unobtrusive ASP.NET validation without dependencies",
   "main": "index.js",
   "scripts": {

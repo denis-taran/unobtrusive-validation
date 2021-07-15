@@ -25,9 +25,9 @@ You can execute a function after validation to perform some additional work. For
 ```javascript
     // if you use a module bundler
 
-    import { form_validation_handlers } from 'unobtrusive-validation';
+    import { validationHandlers } from 'unobtrusive-validation';
 
-    form_validation_handlers.push(function(evt, succeeded) {
+    validationHandlers.push(function(evt, succeeded) {
         if (!succeeded) {
             hideSpinner();
         }
@@ -35,7 +35,7 @@ You can execute a function after validation to perform some additional work. For
 
     // without using a module bundler
 
-    const handlers = window["unobtrusive-validation"].form_validation_handlers;
+    const handlers = window["unobtrusive-validation"].validationHandlers;
 
     handlers.push(function(evt, succeeded) {
         if (!succeeded) {
