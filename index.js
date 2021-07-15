@@ -15,7 +15,8 @@
    */
   var validationHandlers = [];
   /**
-   * List of validators used by the library to validate form elements
+   * List of validators used by the library to validate form elements.
+   * You can add you own validators when needed.
    */
   var validators = [];
   function getElementValue(element) {

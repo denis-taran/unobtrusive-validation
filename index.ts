@@ -16,7 +16,8 @@ interface IFormElement extends HTMLElement {
 export const validationHandlers: ((evt: Event, succeeded: boolean) => void)[] = [];
 
 /**
- * List of validators used by the library to validate form elements
+ * List of validators used by the library to validate form elements.
+ * You can add you own validators when needed.
  */
 export const validators: ((element: IFormElement) => boolean)[] = [];
 
