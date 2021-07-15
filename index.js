@@ -13,11 +13,11 @@
    * List of handlers that will be executed after validation is finished for the submitted form.
    * You can use them to hide/show a spinner or do some additional work.
    */
-  var form_validation_handlers = [];
+  var validationHandlers = [];
   /**
    * List of validators used by the library to validate form elements
    */
-  var form_validators = [];
+  var validators = [];
   function getElementValue(element) {
       return element.value;
   }
@@ -42,8 +42,8 @@
   }
   function validateElement(element) {
       var success = true;
-      for (var _i = 0, form_validators_1 = form_validators; _i < form_validators_1.length; _i++) {
-          var validator = form_validators_1[_i];
+      for (var _i = 0, validators_1 = validators; _i < validators_1.length; _i++) {
+          var validator = validators_1[_i];
           success = success && validator(element);
       }
       if (success) {
@@ -197,15 +197,15 @@
       });
       return valid;
   }
-  form_validators.push(requiredValidator);
-  form_validators.push(lengthValidator);
-  form_validators.push(regexValidator);
-  form_validators.push(rangeValidator);
-  form_validators.push(numberValidator);
-  form_validators.push(equalityValidator);
+  validators.push(requiredValidator);
+  validators.push(lengthValidator);
+  validators.push(regexValidator);
+  validators.push(rangeValidator);
+  validators.push(numberValidator);
+  validators.push(equalityValidator);
   function executeHandlers(evt, succeeded) {
-      for (var _i = 0, form_validation_handlers_1 = form_validation_handlers; _i < form_validation_handlers_1.length; _i++) {
-          var handler = form_validation_handlers_1[_i];
+      for (var _i = 0, validationHandlers_1 = validationHandlers; _i < validationHandlers_1.length; _i++) {
+          var handler = validationHandlers_1[_i];
           handler(evt, succeeded);
       }
   }
@@ -223,8 +223,8 @@
       });
   });
 
-  exports.form_validation_handlers = form_validation_handlers;
-  exports.form_validators = form_validators;
+  exports.validationHandlers = validationHandlers;
+  exports.validators = validators;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
